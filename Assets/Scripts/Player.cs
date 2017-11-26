@@ -73,7 +73,7 @@ public class Player : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            PlayerCanvas.canvas.Initialize();
+            //PlayerCanvas.canvas.Initialize();
             mainCamera.SetActive(false);
         }
 
@@ -92,8 +92,8 @@ public class Player : NetworkBehaviour
 
         if (isLocalPlayer)
         {
-            PlayerCanvas.canvas.WriteGameStatusText("You Died!");
-            PlayerCanvas.canvas.PlayDeathAudio();
+            //PlayerCanvas.canvas.WriteGameStatusText("You Died!");
+            //PlayerCanvas.canvas.PlayDeathAudio();
         }
 
         DisablePlayer();
@@ -148,10 +148,10 @@ public class Player : NetworkBehaviour
 
         if (isLocalPlayer)
         {
-            if (netId == networkID)
-                PlayerCanvas.canvas.WriteGameStatusText("You Won!");
+            /*if (netId == networkID)
+                //PlayerCanvas.canvas.WriteGameStatusText("You Won!");
             else
-                PlayerCanvas.canvas.WriteGameStatusText("Game Over!\n" + name + " Won");
+                //PlayerCanvas.canvas.WriteGameStatusText("Game Over!\n" + name + " Won");*/
         }
     }
 
