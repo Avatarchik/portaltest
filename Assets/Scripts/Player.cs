@@ -57,7 +57,7 @@ public class Player : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            PlayerCanvas.canvas.HideReticule();
+            //PlayerCanvas.canvas.HideReticule();
             mainCamera.SetActive(true);
         }
 

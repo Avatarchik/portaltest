@@ -54,7 +54,7 @@ public class PlayerHealth : NetworkBehaviour
     void OnHealthChanged(int value) {
         health = value;
         if (isLocalPlayer) {
-            PlayerCanvas.canvas.SetHealth(value);
+            //PlayerCanvas.canvas.SetHealth(value);
         }
     }
 

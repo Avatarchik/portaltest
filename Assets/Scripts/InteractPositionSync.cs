@@ -4,10 +4,8 @@ using UnityEngine.Networking;
 public class InteractPositionSync : NetworkBehaviour
 {
     [SerializeField] Transform cameraTransform;
-    [SerializeField] Transform handMount;
-    [SerializeField] Transform gunPivot;
-    [SerializeField] Transform rightHandHold;
-    [SerializeField] Transform leftHandHold;
+    [SerializeField] Transform interactPivot;
+    [SerializeField] Transform centerTransform;
     [SerializeField] float threshold = 10f;
     [SerializeField] float smoothing = 5f;
 
@@ -21,9 +19,9 @@ public class InteractPositionSync : NetworkBehaviour
         anim = GetComponent<Animator>();
 
         if (isLocalPlayer)
-            gunPivot.parent = cameraTransform;
-        else
-            lastOffset = handMount.position - transform.position;
+        {
+            interactPivot.parent = cameraTransform;
+        }
     }
 
     void Update()
@@ -41,11 +39,11 @@ public class InteractPositionSync : NetworkBehaviour
         {
             Quaternion newRotation = Quaternion.Euler(pitch, 0f, 0f);
 
-            Vector3 currentOffset = handMount.position - transform.position;
-            gunPivot.localPosition += currentOffset - lastOffset;
-            lastOffset = currentOffset;
+            //Vector3 currentOffset = centerTransform.position - transform.position;
+            //interactPivot.localPosition += currentOffset - lastOffset;
+            //lastOffset = currentOffset;
 
-            gunPivot.localRotation = Quaternion.Lerp(gunPivot.localRotation,
+            interactPivot.localRotation = Quaternion.Lerp(interactPivot.localRotation,
                 newRotation, Time.deltaTime * smoothing);
         }
     }
@@ -54,21 +52,5 @@ public class InteractPositionSync : NetworkBehaviour
     void CmdUpdatePitch(float newPitch)
     {
         pitch = newPitch;
-    }
-
-    void OnAnimatorIK()
-    {
-        if (!anim)
-            return;
-
-        anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
-        anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1f);
-        anim.SetIKPosition(AvatarIKGoal.RightHand, rightHandHold.position);
-        anim.SetIKRotation(AvatarIKGoal.RightHand, rightHandHold.rotation);
-
-        anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1f);
-        anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1f);
-        anim.SetIKPosition(AvatarIKGoal.LeftHand, leftHandHold.position);
-        anim.SetIKRotation(AvatarIKGoal.LeftHand, leftHandHold.rotation);
     }
 }
