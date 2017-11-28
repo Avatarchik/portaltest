@@ -11,26 +11,42 @@ public class PressurePlate : NetworkBehaviour {
         var player = other.gameObject.GetComponent<Player>();
         if (player != null) {
             //ToggleObject.SetActive(false);
-            RpcRemoteToggle(false);
+            RemoteToggle(false);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         //ToggleObject.SetActive(true);
-        RpcRemoteToggle(true);
+        RemoteToggle(true);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         //ToggleObject.SetActive(false);
-        RpcRemoteToggle(false);
+        RemoteToggle(false);
     }
 
     private void OnCollisionExit(Collision collision)
     {
         //ToggleObject.SetActive(true);
-        RpcRemoteToggle(true);
+        RemoteToggle(true);
+    }
+
+    private void RemoteToggle(bool toggle) {
+        if (isServer)
+        {
+            RpcRemoteToggle(toggle);
+        }
+        else {
+            CmdRemoteToggle(toggle);
+        }
+    }
+
+    [Command]
+    private void CmdRemoteToggle(bool toggle) {
+        ToggleObject.SetActive(toggle);
+        //RpcRemoteToggle(toggle);
     }
 
     [ClientRpc]

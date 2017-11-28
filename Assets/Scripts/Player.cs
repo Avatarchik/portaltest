@@ -120,13 +120,13 @@ public class Player : NetworkBehaviour
     {
         playerName = value;
         gameObject.name = playerName;
-        GetComponentInChildren<Text>(true).text = playerName;
+        //GetComponentInChildren<Text>(true).text = playerName;
     }
 
     void OnColorChanged(Color value)
     {
         playerColor = value;
-        GetComponentInChildren<RendererToggler>().ChangeColor(playerColor);
+        //GetComponentInChildren<RendererToggler>().ChangeColor(playerColor);
     }
 
     [Server]

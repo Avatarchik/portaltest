@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23071306338331652}
   - component: {fileID: 82893026151606878}
   - component: {fileID: 114859065653726118}
+  - component: {fileID: 114862235277864240}
   m_Layer: 0
   m_Name: LaserWall
   m_TagString: Untagged
@@ -107,7 +108,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 332390bce16334b41b9204c58bc1a422, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -115,11 +116,11 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 0.25
-  MinDistance: 0
-  MaxDistance: 1
+  DopplerLevel: 0
+  MinDistance: 1
+  MaxDistance: 2
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -127,20 +128,26 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: 0
+      time: 0.5
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -2.0008
+      outSlope: -2.0008
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.8914896
+      value: 0.68815446
+      inSlope: -2.3448467
+      outSlope: -2.3448467
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      value: 0.04194641
+      inSlope: -0.5002
+      outSlope: -0.5002
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -188,3 +195,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40fb3cb13afc81d4094f009d58783cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114862235277864240
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1072012466004410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 230
+    i1: 126
+    i2: 209
+    i3: 102
+    i4: 56
+    i5: 111
+    i6: 16
+    i7: 116
+    i8: 123
+    i9: 228
+    i10: 143
+    i11: 36
+    i12: 20
+    i13: 246
+    i14: 201
+    i15: 247
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0

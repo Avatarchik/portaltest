@@ -343,9 +343,94 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1843238083230380, guid: e6761d0a2f070b3488f1b8ff32234292, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6761d0a2f070b3488f1b8ff32234292, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &371903852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 371903855}
+  - component: {fileID: 371903854}
+  - component: {fileID: 371903853}
+  m_Layer: 0
+  m_Name: BotSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &371903853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 371903852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6828adabe49c550429641651e3a615e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  botPrefab: {fileID: 1843238083230380, guid: e6761d0a2f070b3488f1b8ff32234292, type: 2}
+  puzzleItems:
+  - {fileID: 469684654}
+--- !u!114 &371903854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 371903852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!4 &371903855
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 371903852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.2, y: 0, z: -7.54}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &469684654 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1684584560831354, guid: 51bf7e2744a3b5a4aac4d5e69801f9f1,
+    type: 2}
+  m_PrefabInternal: {fileID: 896957638}
 --- !u!1 &642219438
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +455,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 642219438}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!124 &642219440
 Behaviour:
   m_ObjectHideFlags: 0
@@ -877,7 +962,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1517543592}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.611307, y: 0.606, z: -7.430765}
+  m_LocalPosition: {x: 36.559, y: 0.606, z: -14.704}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -922,6 +1007,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 82893026151606878, guid: e67ed166386f10747be48f2414f6c9f7,
+        type: 2}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e67ed166386f10747be48f2414f6c9f7, type: 2}
   m_IsPrefabParent: 0
@@ -930,35 +1020,3 @@ GameObject:
   m_PrefabParentObject: {fileID: 1072012466004410, guid: e67ed166386f10747be48f2414f6c9f7,
     type: 2}
   m_PrefabInternal: {fileID: 1534193666}
---- !u!114 &1534193668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1534193667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 230
-    i1: 126
-    i2: 209
-    i3: 102
-    i4: 56
-    i5: 111
-    i6: 16
-    i7: 116
-    i8: 123
-    i9: 228
-    i10: 143
-    i11: 36
-    i12: 20
-    i13: 246
-    i14: 201
-    i15: 247
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
