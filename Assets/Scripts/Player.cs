@@ -133,7 +133,9 @@ public class Player : NetworkBehaviour
     public void Won()
     {
         for (int i = 0; i < players.Count; i++)
+        {
             players[i].RpcGameOver(netId, name);
+        }
 
         Invoke("BackToLobby", 5f);
     }
