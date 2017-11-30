@@ -39,7 +39,8 @@ public class PressurePlate : NetworkBehaviour {
             RpcRemoteToggle(toggle);
         }
         else {
-            CmdRemoteToggle(toggle);
+            //CmdRemoteToggle(toggle);
+            ToggleObject.SetActive(toggle);
         }
     }
 

@@ -9,29 +9,30 @@ public class TwoPersonPass : NetworkBehaviour {
     public int minPlayers = 1;
     private int playerCount = 0;
 
-    private void OnStart()
-    {
-       var doorAnim = Door.GetComponent<Animator>();
-    }
-
     private void OnTriggerEnter(Collider other)
     {
+        var doorAnim = Door.GetComponent<Animator>();
+
         var player = other.gameObject.GetComponent<Player>();
         if (player != null)
         {
             playerCount++;
             if (playerCount == minPlayers) {
-
+                doorAnim.SetBool("character_nearby", true);
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        var doorAnim = Door.GetComponent<Animator>();
         var player = other.gameObject.GetComponent<Player>();
         if (player != null)
         {
             playerCount--;
+            if (playerCount < minPlayers) {
+                doorAnim.SetBool("character_nearby", false);
+            }
         }
     }
 
