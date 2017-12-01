@@ -20,6 +20,9 @@ public class PlayerOffline : MonoBehaviour
     {
         anim.SetFloat("Speed", Input.GetAxis("Vertical"));
         anim.SetFloat("Strafe", Input.GetAxis("Horizontal"));
+        if (Input.GetKey(KeyCode.Space)) {
+            anim.Play("Jump");
+        }
     }
 
 
