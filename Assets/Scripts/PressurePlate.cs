@@ -1,58 +1,81 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class PressurePlate : NetworkBehaviour {
+public class PressurePlate : NetworkBehaviour, IPuzzleElement
+{
     public GameObject ToggleObject;
-	
+    public bool ToggledState { get; private set; }
+
+    public void Awake()
+    {
+        ToggledState = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         var player = other.gameObject.GetComponent<Player>();
-        if (player != null) {
-            //ToggleObject.SetActive(false);
+        if (player != null)
+        {
             RemoteToggle(false);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        //ToggleObject.SetActive(true);
         RemoteToggle(true);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        //ToggleObject.SetActive(false);
         RemoteToggle(false);
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        //ToggleObject.SetActive(true);
         RemoteToggle(true);
     }
 
-    private void RemoteToggle(bool toggle) {
+    private void RemoteToggle(bool toggle)
+    {
         if (isServer)
         {
             RpcRemoteToggle(toggle);
         }
-        else {
-            //CmdRemoteToggle(toggle);
+        else
+        {
             ToggleObject.SetActive(toggle);
+            ToggledState = toggle;
         }
     }
 
     [Command]
-    private void CmdRemoteToggle(bool toggle) {
+    private void CmdRemoteToggle(bool toggle)
+    {
         ToggleObject.SetActive(toggle);
-        //RpcRemoteToggle(toggle);
     }
 
     [ClientRpc]
-    private void RpcRemoteToggle(bool toggle) {
+    private void RpcRemoteToggle(bool toggle)
+    {
         ToggleObject.SetActive(toggle);
+        ToggledState = toggle;
     }
 
+    public PuzzleElementType GetElementType()
+    {
+        return PuzzleElementType.PressurePlate;
+    }
+
+    public GameObject GetLinkedElement()
+    {
+        return ToggleObject;
+    }
+
+    public GameObject GetRootGameObject()
+    {
+        return gameObject;
+    }
 }

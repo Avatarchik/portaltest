@@ -4,19 +4,20 @@ using System.Collections.Generic;
 
 public class PuzzleBot : NetworkBehaviour
 {
-    public bool showDebug = true;
-    public List<GameObject> puzzleItems;
+    
     private int currentItem = 0;
     //PlayerShooting playerShooting;
-    NetworkAnimator anim;
-    float ellapsedTime = 0f;
-
+    private NetworkAnimator anim;
+    private CapsuleCollider capsuleCollider;
+    private float ellapsedTime = 0f;
+    public bool showDebug = true;
+    public List<IPuzzleElement> puzzleItems;
 
     void Awake()
     {
         //playerShooting = GetComponent<PlayerShooting>();
         anim = GetComponent<NetworkAnimator>();
-
+        capsuleCollider = GetComponent<CapsuleCollider>();
         //GetComponent<Player>().playerName = "Bot";
     }
 
@@ -54,18 +55,33 @@ public class PuzzleBot : NetworkBehaviour
         ellapsedTime += Time.deltaTime;
         ellapsedTime = 0f;
         if (puzzleItems[currentItem] != null) {
-            if (Vector3.Distance(puzzleItems[currentItem].transform.position, transform.position) > 0.3f) {
-                //var nextPosition = Vector3.MoveTowards(transform.position, puzzleItems[currentItem].transform.position, 0.1f);
-                transform.LookAt(puzzleItems[currentItem].transform.position);
-                transform.position = Vector3.Lerp(transform.position, puzzleItems[currentItem].transform.position,0.01f);
-                //gameObject.GetComponent<CharacterController>().SimpleMove(Vector3.forward * 0.1f);
-
-            }
-            
-        }
-        //if (playerShooting.enabled)
-        //{
-        //    playerShooting.FireAsBot();
-        //}
+            var current = puzzleItems[currentItem];
+            switch (current.GetElementType()) {
+                case PuzzleElementType.PressurePlate:
+                    EvaluatePressurePlate(current);
+                    break;
+                case PuzzleElementType.GoalDoor:
+                    EvaluateGoalDoor(current);
+                    break;
+                default:
+                    break;
+            }            
+        }    
     }
+
+    [Server]
+    void EvaluatePressurePlate(IPuzzleElement puzzleElement)
+    {
+        var pressurePlate = puzzleElement.GetRootGameObject().GetComponent<PressurePlate>();
+        if (Vector3.Distance(pressurePlate.transform.position, transform.position) > 0.3f)
+        {
+            transform.LookAt(pressurePlate.transform.position);
+            transform.position = Vector3.Lerp(transform.position, pressurePlate.transform.position, 0.01f);
+        }
+    }
+
+    void EvaluateGoalDoor(IPuzzleElement puzzleElement) {
+
+    }
+
 }
