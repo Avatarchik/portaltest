@@ -3,11 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class TwoPersonPass : NetworkBehaviour {
+public class TwoPersonPass : PuzzleElement {
 
     public GameObject Door;
     public int minPlayers = 1;
     private int playerCount = 0;
+
+    public override PuzzleElementType GetElementType()
+    {
+        return PuzzleElementType.GoalDoor;
+    }
+
+    public override GameObject GetLinkedElement()
+    {
+        return null;
+    }
+
+    public override GameObject GetRootGameObject()
+    {
+        return gameObject;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

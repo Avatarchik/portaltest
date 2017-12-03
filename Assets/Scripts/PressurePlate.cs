@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class PressurePlate : NetworkBehaviour, IPuzzleElement
+public class PressurePlate : PuzzleElement
 {
     public GameObject ToggleObject;
     public bool ToggledState { get; private set; }
@@ -64,17 +64,17 @@ public class PressurePlate : NetworkBehaviour, IPuzzleElement
         ToggledState = toggle;
     }
 
-    public PuzzleElementType GetElementType()
+    public override PuzzleElementType GetElementType()
     {
         return PuzzleElementType.PressurePlate;
     }
 
-    public GameObject GetLinkedElement()
+    public override GameObject GetLinkedElement()
     {
         return ToggleObject;
     }
 
-    public GameObject GetRootGameObject()
+    public override GameObject GetRootGameObject()
     {
         return gameObject;
     }

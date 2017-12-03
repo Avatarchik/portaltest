@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections.Generic;
+using UnityEngine.AI;
 
 public class PuzzleBot : NetworkBehaviour
 {
@@ -8,16 +9,18 @@ public class PuzzleBot : NetworkBehaviour
     private int currentItem = 0;
     //PlayerShooting playerShooting;
     private NetworkAnimator anim;
+    private NavMeshAgent nav;
     private CapsuleCollider capsuleCollider;
     private float ellapsedTime = 0f;
     public bool showDebug = true;
-    public List<IPuzzleElement> puzzleItems;
+    public List<PuzzleElement> puzzleItems;
 
     void Awake()
     {
         //playerShooting = GetComponent<PlayerShooting>();
         anim = GetComponent<NetworkAnimator>();
         capsuleCollider = GetComponent<CapsuleCollider>();
+        nav = GetComponent<NavMeshAgent>();
         //GetComponent<Player>().playerName = "Bot";
     }
 
@@ -70,18 +73,36 @@ public class PuzzleBot : NetworkBehaviour
     }
 
     [Server]
-    void EvaluatePressurePlate(IPuzzleElement puzzleElement)
+    void EvaluatePressurePlate(PuzzleElement puzzleElement)
     {
         var pressurePlate = puzzleElement.GetRootGameObject().GetComponent<PressurePlate>();
-        if (Vector3.Distance(pressurePlate.transform.position, transform.position) > 0.3f)
+        if (pressurePlate.ToggledState)
+        {
+            currentItem++;
+            return;
+        }
+        /*if (Vector3.Distance(pressurePlate.transform.position, transform.position) > 0.3f)
         {
             transform.LookAt(pressurePlate.transform.position);
             transform.position = Vector3.Lerp(transform.position, pressurePlate.transform.position, 0.01f);
-        }
+        }*/
+        
+        nav.SetDestination(pressurePlate.transform.position);        
     }
 
-    void EvaluateGoalDoor(IPuzzleElement puzzleElement) {
-
+    [Server]
+    void EvaluateGoalDoor(PuzzleElement puzzleElement) {
+        nav.SetDestination(puzzleElement.transform.position);        
+    }
+    [Server]
+    void EvaluateLaserTrap(PuzzleElement puzzleElement) {
+        if (!puzzleElement.isActiveAndEnabled) {
+            currentItem++;
+            return;
+        }
+        else{
+            currentItem--;
+        }
     }
 
 }
